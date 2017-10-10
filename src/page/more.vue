@@ -26,7 +26,7 @@ export default {
     }
   },
   created:function () {
-    this.$store.state.headerTitle='主页'
+    this.$store.state.headerTitle='更多'
   }
 }
 </script>

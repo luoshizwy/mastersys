@@ -1,23 +1,40 @@
 <template>
   <div>
-    <div class="vux-demo">
-      <img class="logo" src="../assets/vux_logo.png">
-      <h1> </h1>
-    </div>
-    <group title="cell demo">
-      <cell title="VUX" value="cool" is-link></cell>
-    </group>
-    <div id="app">
-      <router-view></router-view>
-    </div>
+    <x-header style="position: absolute;z-index: 100;width:100%;left: 0;top:0;" :title=this.$store.state.headerTitle :left-options="{showBack: false}"></x-header>
+
+    <router-view style="margin-top: 40px;"></router-view>
+    <tabbar>
+      <tabbar-item selected link="/Home">
+        <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
+        <span slot="label">首页</span>
+      </tabbar-item>
+
+      <tabbar-item link="/Tree" >
+        <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
+        <span slot="label">技能</span>
+      </tabbar-item>
+
+      <tabbar-item  link="/Mine">
+        <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
+        <span slot="label">我的</span>
+      </tabbar-item>
+
+      <tabbar-item  link="/More">
+        <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
+        <span slot="label">更多</span>
+      </tabbar-item>
+
+    </tabbar>
   </div>
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import { Group, Cell ,XHeader, Tabbar, TabbarItem} from 'vux'
 
 export default {
   components: {
+    Tabbar, TabbarItem,
+    XHeader,
     Group,
     Cell
   },

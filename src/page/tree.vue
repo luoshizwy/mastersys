@@ -25,9 +25,9 @@ export default {
       msg: 'Hello World!'
     }
   },
-  created:function () {
-    this.$store.state.headerTitle='主页'
-  }
+ created:function () {
+   this.$store.state.headerTitle='技能树'
+ }
 }
 </script>
 

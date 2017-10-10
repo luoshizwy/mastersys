@@ -4,6 +4,11 @@ import Router from 'vue-router'
 import Main from '@/page/main'
 import Login from '@/page/login'
 import Home from '@/page/home'
+import Regist from '@/page/regist'
+import Mine from '@/page/mine'
+import Tree from '@/page/tree'
+import More from '@/page/more'
+
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +20,12 @@ export default new Router({
       component: Login
     },
     {
+      path:'/Regist',
+      name: 'Regist',
+      component: Regist,
+    },
+
+    {
       path: '/Main',
       name: 'Main',
       component: Main,
@@ -23,7 +34,24 @@ export default new Router({
           path:'/Home',
           name: 'Home',
           component: Home,
-        }
+        },
+        {
+          path:'/Mine',
+          name: 'Mine',
+          component: Mine,
+        },
+        {
+          path:'/Tree',
+          name: 'Tree',
+          component: Tree,
+        },
+        {
+          path:'/More',
+          name: 'More',
+          component: More,
+        },
+
+
       ],
     }
   ]
