@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0bf25e6f-fb32-43ea-b66f-b91208021950" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/index.js" afterPath="$PROJECT_DIR$/config/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -215,7 +214,7 @@
       <workItem from="1505781632463" duration="1059000" />
       <workItem from="1505878955049" duration="136000" />
       <workItem from="1507531879287" duration="941000" />
-      <workItem from="1507597075806" duration="1379000" />
+      <workItem from="1507597075806" duration="1413000" />
     </task>
     <task id="LOCAL-00001" summary="新增页面：login main（home）">
       <created>1505730515899</created>
@@ -245,11 +244,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505879048320</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="新增页面：login main（home）">
+      <created>1507598994887</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1507598994887</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7535000" />
+    <option name="totallyTimeSpent" value="7569000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="390" y="0" width="1297" height="1017" extended-state="0" />
