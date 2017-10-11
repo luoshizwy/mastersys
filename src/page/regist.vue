@@ -1,18 +1,27 @@
 <template>
-  <div id="creatfinsh">
+  <div id="Regist">
+    <br>
     <!--<header-lg bigTitle="CET-4" noteTitle="注册一下" ></header-lg>-->
-    <div class="padding-md">
-      <div class="text-size-lg">姓名:</div>
+    <!--<swiper :list="SwiperList" auto style="width:80%;margin:0 auto;" height="180px" :show-dots="showdots"></swiper>-->
+    <div class="logo">
+      <img src="../assets/img/logo.png"/>
+    </div>
+
+     <!--<img src="../assets/img/logo2.png"/>-->
+
+    <divider>注册</divider>
+    <div class="padding-sm">
+      <div class="text-size-md">姓名:</div>
       <div>
         <input type="text" class="inputs" v-model="username"/>
       </div >
       <div class="padding-sm"></div>
-      <div class="text-size-lg">注册手机号:</div>
+      <div class="text-size-md">注册手机号:</div>
       <div>
         <input type="text" class="inputs" v-model="mobile"/>
       </div>
     </div>
-    <div class="text-size-lg padding-md">性别</div>
+    <div class="text-size-md padding-sm">性别</div>
     <div class="radio-md padding-md">
       <ul>
         <li class="radiomd active" id="data-1" @click="sexSelect('data-1')">
@@ -24,15 +33,17 @@
 
       </ul>
     </div>
-    <!--<bottomBtn value="完成注册" color="orange" class="bottomBtn" @click.native="goCreatSucess"></bottomBtn>-->
+    <br>
+    <x-button type="primary" @click.native="goLogin">注册</x-button>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
   import VueResource from 'vue-resource'
-//  import headerLg from '../components/header-lg.vue'
-//  import bottomBtn from '../components/bottomBtn.vue'
+  import { XButton ,Swiper} from 'vux'
+  import Divider from "../../node_modules/vux/src/components/divider/index.vue";
+
   Vue.use(VueResource)
   export default {
 
@@ -41,28 +52,42 @@
       return{
           mobile:'17777777777',
           username:'wDaWang',
-          sex:'1'
+          sex:'1',
+//          showdots:false,
+
+//          SwiperList:[{ url: 'javascript:', img: '../assets/img/logo.png', title: '送你一朵fua' }]
+
+
       }
     },
     components: {
 //      headerLg,
 //      bottomBtn
+      Divider,
+      XButton,
+      Swiper,
     },
     methods:{
 
-      goCreatSucess:function () {
+      goLogin:function () {
         if(this.name!='' && this.mobile!=''){
           var formData =new FormData()
           formData.append('username',this.username)
           formData.append('mobile',this.mobile)
           formData.append('sex',this.sex)
-          formData.append('examTime',this.$parent.examTime)
+//          formData.append('examTime',this.$parent.examTime)
           formData.append('preExamDay',this.$parent.preExamDay)
-          this.$http.post("http://"+this.$store.state.serverIP+"/json/post_reguser.php",formData).then(
+          this.$http.post("http://"+this.$store.state.serverIP+"/json/post_regist.php",formData).then(
               function(response){
                   if(response.data='1'){
-                    this.$router.push({path:'/CreatSucess'})
-                    console.log(formData.username);
+                    this.$store.state.userName=this.username
+                    this.$store.state.userPhone=this.mobile
+                    this.$store.state.userSex=this.sex
+                    console.log(this.$store.state.userName);
+                    console.log(this.$store.state.userPhone);
+                    console.log(this.$store.state.userSex);
+                    this.$router.push({path:'/Login'})
+
                   }
               },function(error){
                 this.$router.push({path:'/Error'})
@@ -88,6 +113,13 @@
 <style lang="less" scoped>
   @import '../assets/css/variables.less';
   @import '../assets/css/main.less';
+  .logo{
+    /*width:100%;*/
+   text-align:  center;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 60px;
+  }
   .inputs{
     border:1px solid @gray-light;
     width: 100%;

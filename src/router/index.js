@@ -15,12 +15,12 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path: '/',
+      path: '/Login',
       name: 'Login',
       component: Login
     },
     {
-      path:'/Regist',
+      path:'/',
       name: 'Regist',
       component: Regist,
     },

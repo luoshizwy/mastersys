@@ -1,9 +1,9 @@
 <template>
   <div>
-    <x-header style="position: absolute;z-index: 100;width:100%;left: 0;top:0;" :title=this.$store.state.headerTitle :left-options="{showBack: false}"></x-header>
+    <x-header class="header" :title=this.$store.state.headerTitle :left-options="{showBack: false}"></x-header>
 
-    <router-view style="margin-top: 40px;"></router-view>
-    <tabbar>
+    <router-view class="margin"></router-view>
+    <tabbar slot="bottom">
       <tabbar-item selected link="/Home">
         <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
         <span slot="label">首页</span>
@@ -50,12 +50,17 @@ export default {
 }
 </script>
 
-<style>
-.vux-demo {
-  text-align: center;
+<style lang="less" scoped>
+.header{
+  position: absolute;z-index: 100;width:100%;left: 0;top:0;
+  div{
+
+  }
 }
-.logo {
-  width: 100px;
-  height: 100px
+.margin{
+  margin-top: 40px;margin-bottom: 40px;
 }
+  .tabbar{
+    position:absolute;
+  }
 </style>
