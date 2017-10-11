@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <x-header class="header" :title=this.$store.state.headerTitle :left-options="{showBack: false}"></x-header>
+  <div id="app">
+    <x-header id="header" :title=this.$store.state.headerTitle :left-options="{showBack: false}"></x-header>
 
-    <router-view class="margin"></router-view>
-    <tabbar slot="bottom">
+    <router-view id="view"></router-view>
+
+    <tabbar id="bottom">
       <tabbar-item selected link="/Home">
         <!--<img slot="icon" src="../assets/demo/icon_nav_cell.png">-->
         <span slot="label">首页</span>
@@ -30,7 +31,7 @@
 
 <script>
 import { Group, Cell ,XHeader, Tabbar, TabbarItem} from 'vux'
-
+import router from '../router/index'
 export default {
   components: {
     Tabbar, TabbarItem,
@@ -51,16 +52,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header{
-  position: absolute;z-index: 100;width:100%;left: 0;top:0;
-  div{
+  @import '~vux/src/styles/reset.less';
+  @import '../assets/css/variables.less';
+  @import '../assets/css/main.less';
+#header{
+  left: 0;
+  top: 0;
+  position: fixed;
+  z-index: 100;
+  width:100%;
+}
+  #view{
+    margin-top: 40px;
+    margin-bottom: 50px;
 
   }
-}
-.margin{
-  margin-top: 40px;margin-bottom: 40px;
-}
-  .tabbar{
-    position:absolute;
+  #bottom{
+    left: 0;
+    bottom: 0;
+    position: fixed;
   }
 </style>

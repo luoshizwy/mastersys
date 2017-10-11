@@ -8,6 +8,8 @@ import Regist from '@/page/regist'
 import Mine from '@/page/mine'
 import Tree from '@/page/tree'
 import More from '@/page/more'
+import registSetPassWord from '@/page/registSetPassWord'
+
 
 Vue.use(Router)
 
@@ -18,6 +20,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/registSetPassWord',
+      name: 'registSetPassWord',
+      component: registSetPassWord
     },
     {
       path:'/',

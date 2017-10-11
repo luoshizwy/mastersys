@@ -11,8 +11,13 @@ var state={
   userId:'',
   userSex:'',
   userPhone:'',
+  //师傅参数
+
+  //徒弟参数
+
 //header
   headerTitle:'主页'
+
 
 }
 

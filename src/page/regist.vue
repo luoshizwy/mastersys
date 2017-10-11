@@ -13,7 +13,7 @@
     <div class="padding-sm">
       <div class="text-size-md">姓名:</div>
       <div>
-        <input type="text" class="inputs" v-model="username"/>
+        <input type="password" class="inputs" v-model="username"/>
       </div >
       <div class="padding-sm"></div>
       <div class="text-size-md">注册手机号:</div>
@@ -34,7 +34,7 @@
       </ul>
     </div>
     <br>
-    <x-button type="primary" @click.native="goLogin">注册</x-button>
+    <x-button type="primary" @click.native="goSetPassWord">提交</x-button>
   </div>
 </template>
 
@@ -69,7 +69,7 @@
     },
     methods:{
 
-      goLogin:function () {
+      goSetPassWord:function () {
         if(this.name!='' && this.mobile!=''){
           var formData =new FormData()
           formData.append('username',this.username)
@@ -80,19 +80,26 @@
           this.$http.post("http://"+this.$store.state.serverIP+"/json/post_regist.php",formData).then(
               function(response){
                   if(response.data='1'){
+                    //模拟注册成功
                     this.$store.state.userName=this.username
                     this.$store.state.userPhone=this.mobile
                     this.$store.state.userSex=this.sex
                     console.log(this.$store.state.userName);
                     console.log(this.$store.state.userPhone);
                     console.log(this.$store.state.userSex);
-                    this.$router.push({path:'/Login'})
+                    this.$router.push({path:'/registSetPassWord'})
 
                   }
               },function(error){
                 this.$router.push({path:'/Error'})
             }
           )
+        }else{
+          this.$vux.toast.text('请输入完整信息','bottom')
+
+          setTimeout(()=>{
+            this.$vux.toast.hide()
+          },2000)
         }
 
       },

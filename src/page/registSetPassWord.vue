@@ -1,18 +1,25 @@
 <template>
+
   <div id="login">
+    <br>
+    <div class="logo">
+      <img src="../assets/img/logo2.png"/>
+    </div>
+    <divider>设置密码</divider>
     <!--<header-lg bigTitle="CET-4" noteTitle="注册一下" ></header-lg>-->
     <div class="padding-md">
-      <div class="text-size-lg">账号:</div>
+      <div class="text-size-lg">设置密码:</div>
       <div>
-        <input type="text" class="inputs" v-model="mobile"/>
+        <input type="password" class="inputs" v-model="password"/>
       </div >
       <div class="padding-sm"></div>
-      <div class="text-size-lg">注册手机号:</div>
+      <div class="text-size-lg">再输入一遍:</div>
       <div>
-        <input type="text" class="inputs" v-model="mobile"/>
+        <input type="password" class="inputs" v-model="comFirm"/>
       </div>
     </div>
-
+    <br>
+    <x-button type="primary" @click.native="goLogin">注册</x-button>
 
     <!--<bottomBtn value="完成注册" color="orange" class="bottomBtn" @click.native="goCreatSucess"></bottomBtn>-->
   </div>
@@ -21,6 +28,8 @@
 <script>
   import Vue from 'vue'
   import VueResource from 'vue-resource'
+  import { XButton ,Swiper} from 'vux'
+  import Divider from "../../node_modules/vux/src/components/divider/index.vue";
 //  import headerLg from '../components/header-lg.vue'
 //  import bottomBtn from '../components/bottomBtn.vue'
   Vue.use(VueResource)
@@ -29,35 +38,42 @@
     name: 'creatfinsh',
     data:function () {
       return{
-          mobile:'17777777777',
-          username:'wDaWang',
-          sex:'1'
+
+        comFirm:'',
+        password:''
       }
     },
     components: {
 //      headerLg,
 //      bottomBtn
+      XButton,
+      Divider,
     },
     methods:{
 
-      goCreatSucess:function () {
-        if(this.name!='' && this.mobile!=''){
+      goLogin:function () {
+
+        if(this.password!='' &&this.password==this.comFirm){
           var formData =new FormData()
-          formData.append('username',this.username)
-          formData.append('mobile',this.mobile)
-          formData.append('sex',this.sex)
-          formData.append('examTime',this.$parent.examTime)
+
           formData.append('preExamDay',this.$parent.preExamDay)
-          this.$http.post("http://"+this.$store.state.serverIP+"/json/post_reguser.php",formData).then(
+          this.$http.post("http://"+this.$store.state.serverIP+"/json/post_regist.php",formData).then(
               function(response){
                   if(response.data='1'){
-                    this.$router.push({path:'/CreatSucess'})
+                    this.$router.push({path:'/Home'})
                     console.log(formData.username);
                   }
               },function(error){
                 this.$router.push({path:'/Error'})
             }
           )
+        }else{
+          this.$vux.toast.text('两次密码输入不一致，请重新提交！','bottom')
+          this.comFirm=''
+          this.password=''
+          setTimeout(()=>{
+            this.$vux.toast.hide()
+          },2000)
         }
 
       },
@@ -78,8 +94,12 @@
 <style lang="less" scoped>
   @import '../assets/css/variables.less';
   @import '../assets/css/main.less';
-  #login{
-    /*background-color: #666666;*/
+  .logo{
+    /*width:100%;*/
+    text-align:  center;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 60px;
   }
   .inputs{
     border:1px solid @gray-light;

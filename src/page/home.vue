@@ -1,63 +1,68 @@
 <template>
-  <div>
-    <p>222222222222</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>222222222222</p>
+  <div id="home">
+    <group style="margin-top: 40px;">
+      <cell title="公告" >
+        <marquee >
+          <marquee-item v-for="i in announcementList" :key="i" >{{i}}</marquee-item>
+        </marquee>
+      </cell>
+    </group>
   </div>
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import { Group, Cell , Marquee, MarqueeItem} from 'vux'
 
 export default {
   components: {
     Group,
-    Cell
+    Cell,
+    Marquee,
+    MarqueeItem
   },
   data () {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
+      announcementList:['公告1','公告2'],
       msg: 'Hello World!'
     }
   },
   created:function () {
     this.$store.state.headerTitle='主页'
+  },
+  methods:{
+    getAnnouncementList:function () {
+        this.$axios.get('http://'+this.$store.state.serverIP+'/json/announcement.php')
+          .then(function (res) {
+            console.info(res)
+
+            this.announcementList=eval('('+res.data+')')
+            console.info(this.announcementList)
+          }.bind(this))
+          .catch(function (err) {
+//            clearInterval(this.getAnnouncementList)
+          })
+    },
+  },
+
+  mounted:function () {
+    this.$nextTick(function () {
+      console.info('timer启动')
+//      this.announcementList=[]
+//      setInterval(this.getAnnouncementList,2000)
+    })
+  },
+  destroyed:function () {
+    console.info('timer清除')
+//    clearInterval(this.getAnnouncementList)
   }
 }
+
 </script>
 
-<style>
-.vux-demo {
-  text-align: center;
-}
-.logo {
-  width: 100px;
-  height: 100px
-}
+<style scoped>
+
+
+
+
+
 </style>
