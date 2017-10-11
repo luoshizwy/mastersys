@@ -31,10 +31,8 @@
         @click.native="getSkillList"></cell>
     </group>
 
-      <template v-if="showSkillList">
-        <cell-box class="sub-item" is-link >content 001</cell-box>
-        <cell-box class="sub-item" is-link >content 001</cell-box>
-        <cell-box class="sub-item" is-link >content 001</cell-box>
+      <template v-if="showSkillList" v-for="item in skillList">
+        <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.skillName}}</cell-box>
       </template>
 
     <divider>我的徒弟</divider>
@@ -49,10 +47,21 @@ import Divider from "../../node_modules/vux/src/components/divider/index.vue";
 
 export default {
   methods:{
+    onItemClick:function (item) {
+      console.info(item)
+    },
     getSkillList:function () {
       if(this.skillList.length==0){
         //服务器数据获取
-
+        this.$axios.get('http://'+this.$store.state.serverIP+'/json/skillList.php')
+          .then(function (res) {
+//            console.info(res)
+            this.skillList=eval('('+res.data+')')
+            console.info(this.skillList)
+          }.bind(this))
+          .catch(function (err) {
+            console.info(err)
+          }.bind(this))
       }
       this.showSkillList = !this.showSkillList
     }
@@ -69,9 +78,9 @@ export default {
       showSkillList:false,
 
 
-      skillNum:'10',
-      prenticeNum:'10',
-      skillBeDoneNum:'10',
+      skillNum:'',
+      prenticeNum:'',
+      skillBeDoneNum:'',
       msg: 'Hello World!',
 
 
@@ -80,6 +89,26 @@ export default {
   },
   created:function () {
     this.$store.state.headerTitle='我的'
+  },
+  mounted:function () {
+    this.$nextTick(function () {
+      //获取师傅信息
+      this.$axios.get('http://'+this.$store.state.serverIP+'/json/masterUserImformation.php')
+        .then(function (res) {
+          console.info(res)
+
+          var information=eval('('+res.data+')')
+//          var information=res.data
+          console.info(information)
+          this.skillNum=information.skillNum
+          this.prenticeNum=information.prenticeNum
+          this.skillBeDoneNum=information.skillBeDoneNum
+//          console.info( this.skillNum)
+        }.bind(this))
+        .catch(function (err) {
+          console.info(err)
+        }.bind(this))
+    })
   }
 }
 </script>

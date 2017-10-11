@@ -40,7 +40,7 @@ export default {
           }.bind(this))
           .catch(function (err) {
 //            clearInterval(this.getAnnouncementList)
-          })
+          }.bind(this))
     },
   },
 
