@@ -9,6 +9,7 @@ import Mine from '@/page/mine'
 import Tree from '@/page/tree'
 import More from '@/page/more'
 import registSetPassWord from '@/page/registSetPassWord'
+import AddSkillFun from '@/page//Fun/addSkillFun'
 
 
 Vue.use(Router)
@@ -20,6 +21,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/AddSkillFun',
+      name: 'AddSkillFun',
+      component: AddSkillFun
     },
     {
       path: '/registSetPassWord',

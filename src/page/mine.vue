@@ -16,12 +16,18 @@
         <div class="vux-1px-r">
           <span>{{skillBeDoneNum}}</span>
           <br/>
-          技能学习数
+          技能被学习数
         </div>
 
       </div>
+
     </card>
-    <divider>我的技能</divider>
+    <divider>星级</divider>
+    <div style="width: 100%;text-align: center">
+     <rater v-model="rater" style=""></rater>
+    </div>
+    <!--<divider>我的技能</divider>-->
+
     <group title="查看我的技能">
       <cell
         title="技能列表"
@@ -35,20 +41,46 @@
         <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.skillName}}</cell-box>
       </template>
 
-    <divider>我的徒弟</divider>
+    <!--<divider>我的徒弟</divider>-->
+    <group title="查看我的徒弟">
+      <cell
+        title="徒弟列表"
+        is-link
+        :border-intent="false"
+        :arrow-direction="showPrenticeList ? 'up' : 'down'"
+        @click.native="getPrenticList"></cell>
+    </group>
 
+    <template v-if="showPrenticeList" v-for="item in prenticeList">
+      <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.prenticeName}}</cell-box>
+    </template>
     <divider>统计数据</divider>
   </div>
 </template>
 
 <script>
-import { Group, Cell ,Card,CellBox} from 'vux'
+import { Group, Cell ,Card,CellBox,Panel,Rater} from 'vux'
 import Divider from "../../node_modules/vux/src/components/divider/index.vue";
 
 export default {
   methods:{
     onItemClick:function (item) {
       console.info(item)
+    },
+    getPrenticList:function () {
+      if(this.prenticeList.length==0){
+        //服务器数据获取
+        this.$axios.get('http://'+this.$store.state.serverIP+'/json/prenticeList.php')
+          .then(function (res) {
+//            console.info(res)
+            this.prenticeList=eval('('+res.data+')')
+            console.info(this.prenticeList)
+          }.bind(this))
+          .catch(function (err) {
+            console.info(err)
+          }.bind(this))
+      }
+      this.showPrenticeList = !this.showPrenticeList
     },
     getSkillList:function () {
       if(this.skillList.length==0){
@@ -71,11 +103,15 @@ export default {
     Cell,
     Divider,
     Card,
-    CellBox
+    CellBox,
+    Panel,
+    Rater,
   },
   data () {
     return {
       showSkillList:false,
+      showPrenticeList:false,
+      rater:0,
 
 
       skillNum:'',
@@ -84,7 +120,8 @@ export default {
       msg: 'Hello World!',
 
 
-      skillList:[]
+      skillList:[],
+      prenticeList:[]
     }
   },
   created:function () {
@@ -103,6 +140,7 @@ export default {
           this.skillNum=information.skillNum
           this.prenticeNum=information.prenticeNum
           this.skillBeDoneNum=information.skillBeDoneNum
+          this.rater=information.rater
 //          console.info( this.skillNum)
         }.bind(this))
         .catch(function (err) {

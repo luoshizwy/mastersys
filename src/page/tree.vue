@@ -1,10 +1,6 @@
 <template>
   <div>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
+    <button style="width: 100%;height: 50px;" @click="addSkill">添加技能</button>
   </div>
 </template>
 
@@ -26,8 +22,13 @@ export default {
     }
   },
  created:function () {
-   this.$store.state.headerTitle='技能树'
- }
+   this.$store.state.headerTitle='技能管理'
+ },
+  methods:{
+    addSkill:function () {
+      this.$router.push({path:'/addSkillFun'})
+    }
+  }
 }
 </script>
 
