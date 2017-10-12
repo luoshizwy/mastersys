@@ -89,6 +89,12 @@ export default {
           .then(function (res) {
 //            console.info(res)
             this.skillList=eval('('+res.data+')')
+            if( this.$store.state.newSkillList.length>0){
+              //把store中的新增skill加载进来
+              for(var i=0;i<this.$store.state.newSkillList.length;i++){
+                this.skillList.push(this.$store.state.newSkillList[i])
+              }
+            }
             console.info(this.skillList)
           }.bind(this))
           .catch(function (err) {

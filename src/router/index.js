@@ -23,7 +23,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/AddSkillFun',
+      path: '/AddSkillFun/:title/:skillId',//skillId在编辑技能时传入
       name: 'AddSkillFun',
       component: AddSkillFun
     },

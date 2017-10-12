@@ -1,6 +1,7 @@
 <template>
   <div>
     <button style="width: 100%;height: 50px;" @click="addSkill">添加技能</button>
+    <button style="width: 100%;height: 50px;" @click="addSkill">学习技能</button>
   </div>
 </template>
 
@@ -26,7 +27,7 @@ export default {
  },
   methods:{
     addSkill:function () {
-      this.$router.push({path:'/addSkillFun'})
+      this.$router.push({path:'/addSkillFun/添加技能/no'})
     }
   }
 }

@@ -7,6 +7,8 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import  { ToastPlugin } from 'vux'
+import  { ConfirmPlugin } from 'vux'
+
 
 
 
@@ -16,6 +18,7 @@ FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.use(ToastPlugin)
+Vue.use(ConfirmPlugin)
 
 
 /* eslint-disable no-new */

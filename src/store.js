@@ -16,7 +16,10 @@ var state={
   //徒弟参数
 
 //header
-  headerTitle:'主页'
+  headerTitle:'主页',
+  //新增技能列表
+  newSkillList:[],
+
 
 
 }
