@@ -1,7 +1,8 @@
 <template>
   <div>
     <button style="width: 100%;height: 50px;" @click="addSkill">添加技能</button>
-    <button style="width: 100%;height: 50px;" @click="addSkill">学习技能</button>
+    <button style="width: 100%;height: 50px;" @click="addPrenticeFun">邀请学习</button>
+    <button style="width: 100%;height: 50px;" @click="addPrenticeFun">添加技能文档</button>
   </div>
 </template>
 
@@ -26,6 +27,9 @@ export default {
    this.$store.state.headerTitle='技能管理'
  },
   methods:{
+    addPrenticeFun:function () {
+      this.$router.push({path:'/AddPrenticeFun'})
+    },
     addSkill:function () {
       this.$router.push({path:'/addSkillFun/添加技能/no'})
     }

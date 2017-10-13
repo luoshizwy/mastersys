@@ -9,7 +9,8 @@ import Mine from '@/page/mine'
 import Tree from '@/page/tree'
 import More from '@/page/more'
 import registSetPassWord from '@/page/registSetPassWord'
-import AddSkillFun from '@/page//Fun/addSkillFun'
+import AddSkillFun from '@/page/Fun/addSkillFun'
+import AddPrenticeFun from '@/page/Fun/addPrenticeFun'
 
 
 Vue.use(Router)
@@ -21,6 +22,12 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+
+    {
+      path: '/AddPrenticeFun',
+      name: 'AddPrenticeFun',
+      component: AddPrenticeFun
     },
     {
       path: '/AddSkillFun/:title/:skillId',//skillId在编辑技能时传入

@@ -8,6 +8,7 @@ import store from './store'
 import axios from 'axios'
 import  { ToastPlugin } from 'vux'
 import  { ConfirmPlugin } from 'vux'
+import Mint from 'mint-ui';
 
 
 
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.use(ToastPlugin)
 Vue.use(ConfirmPlugin)
+Vue.use(Mint);
 
 
 /* eslint-disable no-new */

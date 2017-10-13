@@ -1,11 +1,11 @@
 <template>
   <div id="home">
     <x-header id="header" :title="title" :left-options="{showBack: true}"></x-header>
-    <p style="margin-top: 46px">技能名称：{{skillName}}</p>
-    <p>技能等级：{{skillLevel}}</p>
-    <p>技能掌握阶段：{{stepList}}</p>
-    <p>指导：{{skillGuide}}</p>
-    <p>{{skill}}</p>
+    <!--<p style="margin-top: 46px">技能名称：{{skillName}}</p>-->
+    <!--<p>技能等级：{{skillLevel}}</p>-->
+    <!--<p>技能掌握阶段：{{stepList}}</p>-->
+    <!--<p>指导：{{skillGuide}}</p>-->
+    <!--<p>{{skill}}</p>-->
 
 
     <div style="margin-top: 46px">
@@ -128,13 +128,62 @@ export default {
       if(this.$route.params.skillId!='no'){
         console.info('编辑')
         var path ;
-
-
-        if(this.$route.params.skillId==1){
-          path =''
-        }else if(this.$route.params.skillId==2){
-          path =''
+        if(this.$route.params.skillId=='1'){
+          console.info(11111111)
+          path ='http://'+this.$store.state.serverIP+'/json/skillOne.php'
+          this.$axios.get(path)
+            .then(function (res) {
+            console.info(res)
+              this.skill=eval('('+res.data+')')
+              console.info(this.skill)
+              this.skillName=this.skill.skillName
+              console.info(this.skillName)
+              this.skillLevel=this.skill.skillLevel
+              console.info(this.skillLevel)
+              this.stepList=this.skill.step
+              console.info(this.stepList)
+              this.skillGuide=this.skill.guide
+              console.info(this.skillGuide)
+            }.bind(this))
+            .catch(function (err) {
+              console.info(err)
+            }.bind(this))
+        }else if(this.$route.params.skillId=='2'){
+          console.info(22222222)
+          path ='http://'+this.$store.state.serverIP+'/json/skillTwo.php'
+          this.$axios.get(path)
+            .then(function (res) {
+            console.info(res)
+              this.skill=eval('('+res.data+')')
+//              this.skill=res.data
+              console.info(this.skill)
+              this.skillName=this.skill.skillName
+              console.info(this.skillName)
+              this.skillLevel=this.skill.skillLevel
+              console.info(this.skillLevel)
+              this.stepList=this.skill.step
+              console.info(this.stepList)
+              this.skillGuide=this.skill.guide
+              console.info(this.skillGuide)
+            }.bind(this))
+            .catch(function (err) {
+              console.info(err)
+            }.bind(this))
         }
+        else if(this.$route.params.skillId=='3'){
+          console.info(33333333333)
+         this.skill=this.$store.state.newSkillList[0]
+          console.info(this.skill)
+          this.skillName=this.skill.skillName
+          console.info(this.skillName)
+          this.skillLevel=this.skill.skillLevel
+          console.info(this.skillLevel)
+          this.stepList=this.skill.step
+          console.info(this.stepList)
+          this.skillGuide=this.skill.guide
+          console.info(this.skillGuide)
+        }
+
 
 
       }else{
@@ -144,6 +193,14 @@ export default {
     })
   },
   destroyed:function () {
+//    this.skillName=''
+//    this.skillLevel=0
+//    this.stepList=[]
+//    this.skillGuide=''
+//
+//    this.skill={}
+//
+//    this.stepNum=0
 //    console.info('timer清除')
 //    clearInterval(this.getAnnouncementList)
   }

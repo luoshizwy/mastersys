@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 var state={
   //服务器
-  serverIP:'127.0.0.1',
+  serverIP:'10.25.5.57',
 
   //用户信息
   userName:'wangyue',

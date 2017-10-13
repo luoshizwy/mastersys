@@ -24,7 +24,7 @@
     </card>
     <divider>星级</divider>
     <div style="width: 100%;text-align: center">
-     <rater v-model="rater" style=""></rater>
+     <rater v-model="rater" style="" disabled></rater>
     </div>
     <!--<divider>我的技能</divider>-->
 
@@ -66,6 +66,7 @@ export default {
   methods:{
     onItemClick:function (item) {
       console.info(item)
+      this.$router.push({path:'/addSkillFun/编辑技能/'+item.id})
     },
     getPrenticList:function () {
       if(this.prenticeList.length==0){
