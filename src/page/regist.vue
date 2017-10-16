@@ -13,12 +13,12 @@
     <div class="padding-sm">
       <div class="text-size-md">姓名:</div>
       <div>
-        <input type="password" class="inputs" v-model="username"/>
+        <input type="text" class="inputs" placeholder="请输入姓名" v-model="username"/>
       </div >
       <div class="padding-sm"></div>
       <div class="text-size-md">注册手机号:</div>
       <div>
-        <input type="text" class="inputs" v-model="mobile"/>
+        <input type="text" class="inputs" placeholder="请输入注册手机号" v-model="mobile"/>
       </div>
     </div>
     <div class="text-size-md padding-sm">性别</div>
@@ -50,8 +50,8 @@
     name: 'creatfinsh',
     data:function () {
       return{
-          mobile:'17777777777',
-          username:'wDaWang',
+          mobile:'',
+          username:'',
           sex:'1',
 //          showdots:false,
 

@@ -41,6 +41,18 @@
         <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.skillName}}</cell-box>
       </template>
 
+    <group title="查看我的笔记">
+      <cell
+        title="我的笔记"
+        is-link
+        :border-intent="false"
+        :arrow-direction="showDocList ? 'up' : 'down'"
+        @click.native="getDocList"></cell>
+    </group>
+
+    <template v-if="showDocList" v-for="item in docList">
+      <cell-box class="sub-item" is-link @click.native="">{{item.name}}</cell-box>
+    </template>
     <!--<divider>我的徒弟</divider>-->
     <group title="查看我的徒弟">
       <cell
@@ -52,9 +64,9 @@
     </group>
 
     <template v-if="showPrenticeList" v-for="item in prenticeList">
-      <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.prenticeName}}</cell-box>
+      <cell-box class="sub-item" is-link @click.native="toPrenticeDetial(item)">{{item.prenticeName}}</cell-box>
     </template>
-    <divider>统计数据</divider>
+
   </div>
 </template>
 
@@ -64,6 +76,16 @@ import Divider from "../../node_modules/vux/src/components/divider/index.vue";
 
 export default {
   methods:{
+    getDocList:function () {
+      this.docList=[{name:'Java心路历程',context:''}
+      ,{name:'面向对象的通俗解释',context:''}
+      , {name:'关于CSS的学习笔记',context:''}]
+      this.showDocList = !this.showDocList
+    },
+    toPrenticeDetial:function (item) {
+      console.info(item)
+      this.$router.push({path:'/PrenticeDetail/'+item.id})
+    },
     onItemClick:function (item) {
       console.info(item)
       this.$router.push({path:'/addSkillFun/编辑技能/'+item.id})
@@ -118,6 +140,7 @@ export default {
     return {
       showSkillList:false,
       showPrenticeList:false,
+      showDocList:false,
       rater:0,
 
 
@@ -128,7 +151,8 @@ export default {
 
 
       skillList:[],
-      prenticeList:[]
+      prenticeList:[],
+      docList:[],
     }
   },
   created:function () {

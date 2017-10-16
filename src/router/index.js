@@ -11,6 +11,9 @@ import More from '@/page/more'
 import registSetPassWord from '@/page/registSetPassWord'
 import AddSkillFun from '@/page/Fun/addSkillFun'
 import AddPrenticeFun from '@/page/Fun/addPrenticeFun'
+import PrenticeDetail from '@/page/Fun/prenticeDetail'
+import AddDocFun from '@/page/Fun/addDocFun'
+
 
 
 Vue.use(Router)
@@ -28,6 +31,16 @@ export default new Router({
       path: '/AddPrenticeFun',
       name: 'AddPrenticeFun',
       component: AddPrenticeFun
+    },
+    {
+      path: '/PrenticeDetail/:prenticeId',
+      name: 'PrenticeDetail',
+      component: PrenticeDetail
+    },
+    {
+      path: '/AddDocFun',
+      name: 'AddDocFun',
+      component: AddDocFun
     },
     {
       path: '/AddSkillFun/:title/:skillId',//skillId在编辑技能时传入

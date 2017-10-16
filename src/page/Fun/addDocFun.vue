@@ -1,25 +1,11 @@
 <template>
   <div id="home">
-
-    <x-header  id="header" title="学徒详情" :left-options="{showBack: true}"></x-header>
-
-    <div class="swiper">
-      <swiper :list="baseList" auto style="width:80%;margin:0 auto;" height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
-    </div>
+    <x-header id="header" title="写笔记" :left-options="{showBack: true}"></x-header>
 
 
-    <br>
-    <group title="学徒信息">
-      <cell-form-preview :border-intent="false" :list="list"></cell-form-preview>
-    </group>
 
-    <!--<template v-if="showSkillList" v-for="item in skillList">-->
-      <!--<cell-box class="sub-item" is-link @click.native="">{{item.skillName}}</cell-box>-->
-    <!--</template>-->
-
-
-    <br>
-      <group title="正在学习技能">
+    <div style="margin-top: 46px">
+      <group title="选择我的技能">
         <cell
           title="技能列表"
           is-link
@@ -29,13 +15,19 @@
       </group>
 
       <template v-if="showSkillList" v-for="item in skillList">
-        <cell-box class="sub-item" is-link @click.native="">{{item.skillName}}</cell-box>
+        <cell-box class="sub-item" is-link @click.native="onItemClick(item)">{{item.skillName}}</cell-box>
       </template>
 
+      <group title="已选技能">
+       <cell-box class="sub-item"  >{{chooseSkill}}</cell-box>
+      </group>
 
-    <br>
+      <group title="写笔记">
+        <x-textarea :max="2000" placeholder="在此书写笔记..." height="300"></x-textarea>
+      </group>
+      <br>
 
-      <!--<x-button  type="primary" @click.native="createQrcode">生成二维码</x-button>-->
+      <x-button  type="primary" @click.native="submit">提交</x-button>
 
       <!--<div v-transfer-dom>-->
         <!--<x-dialog v-model="showQrcode" class="dialog-demo" hide-on-blur>-->
@@ -51,20 +43,19 @@
           <!--</div>-->
         <!--</x-dialog>-->
       <!--</div>-->
-
+    </div>
   </div>
 </template>
 
 <script>
-import {CellFormPreview,Swiper,TransferDomDirective as TransferDom,Qrcode,XDialog,CellBox,XTextarea,XButton,Rater,XInput, XHeader,Group, Cell , Marquee, MarqueeItem} from 'vux'
+import {TransferDomDirective as TransferDom,Qrcode,XDialog,CellBox,XTextarea,XButton,Rater,XInput, XHeader,Group, Cell , Marquee, MarqueeItem} from 'vux'
 
 export default {
   directives: {
     TransferDom
   },
   components: {
-    CellFormPreview,
-    Swiper,
+
     Group,
     Cell,
     Marquee,
@@ -83,42 +74,24 @@ export default {
       title:'',
       msg: 'Hello World!',
       showSkillList:false,
-      showQrcode:false,
+
 
       skill:{},
       skillList:[],
+      chooseSkill:''
 
-      baseList :[{
-        url: 'javascript:',
-        img: 'http://10.25.5.57/img/头像2.png',
-
-      }, {
-        url: 'javascript:',
-        img: 'http://10.25.5.57/img/头像3.png',
-
-      }],
-
-      prenticeDetialList:[],
-      list: [{
-        label: '姓名',
-        value: ''
-      }, {
-        label: '单位',
-        value: ''
-      }, {
-        label: '联系方式',
-        value: ''
-      }]
 
     }
   },
-  created:function () {
 
-  },
   methods:{
-    createQrcode:function () {
-      this.showQrcode=true
+    onItemClick:function (obj) {
+      this.chooseSkill=obj.skillName
+      this.showSkillList = !this.showSkillList
     },
+//    createQrcode:function () {
+//      this.showQrcode=true
+//    },
     getSkillList:function () {
       if(this.skillList.length==0){
         //服务器数据获取
@@ -167,35 +140,7 @@ export default {
 
   mounted:function () {
     this.$nextTick(function () {
-      this.$axios.get('http://'+this.$store.state.serverIP+'/json/prenticeList.php')
-        .then(function (res) {
-//            console.info(res)
-          this.prenticeDetialList=eval('('+res.data+')')
 
-          console.info(this.prenticeDetialList)
-        }.bind(this))
-        .catch(function (err) {
-          console.info(err)
-        }.bind(this))
-      if(this.$route.params.prenticeId==111){
-        this.list[0].value='Eclair'
-        this.list[1].value='信息中心'
-        this.list[2].value='0937-6718860'
-        this.baseList=[{
-          url: 'javascript:',
-          img: 'http://10.25.5.57/img/头像2.png',
-
-        }]
-      }else if(this.$route.params.prenticeId==222){
-        this.list[0].value='Lolipop'
-        this.list[1].value='信息中心'
-        this.list[2].value='0937-6718860'
-        this.baseList=[{
-          url: 'javascript:',
-          img: 'http://10.25.5.57/img/头像3.png',
-
-        }]
-      }
     })
   },
   destroyed:function () {
@@ -208,8 +153,6 @@ export default {
 
 <style lang="less" scoped>
   @import '~vux/src/styles/1px.less';
-  /*@import '../../assets/css/variables.less';*/
-  /*@import '../../assets/css/main.less';*/
   #header{
     left: 0;
     top: 0;
@@ -218,11 +161,7 @@ export default {
     width:100%;
   }
 
-  .swiper{
-    width: 100%;
 
-    margin-top: 60px;
-  }
   .sub-item {
     color: #888;
   }

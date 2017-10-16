@@ -1,28 +1,40 @@
 <template>
   <div>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
-    <p>111111111111</p>
+    <panel header="我的名片"  :list="list" type="5" ></panel>
+
+    <group title="设置">
+      <x-switch title="开启公告" v-model="value1"></x-switch>
+      <x-switch title="公开我的技能"></x-switch>
+    </group>
   </div>
+
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import {XSwitch , Group, Cell,Panel } from 'vux'
 
 export default {
   components: {
     Group,
-    Cell
+    Cell,
+    Panel,
+    XSwitch
   },
   data () {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
-      msg: 'Hello World!'
+      value1:true,
+      list: [{
+        src: 'http://somedomain.somdomain/x.jpg',
+        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+        title: 'XXX',
+        desc: '单位：信息中心',
+//        url: '/component/cell',
+        meta: {
+          source: '协理工程师',
+          date: '',
+          other: '电话：0937-6718860'
+        }
+      }],
     }
   },
   created:function () {
